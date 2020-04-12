@@ -6,8 +6,15 @@ async function create(values) {
   return user;
 }
 
-export { create };
+async function findAll(where) {
+  const users = await User.findAll(where);
+
+  return users;
+}
+
+export { create, findAll };
 
 export default {
   create,
+  findAll,
 };
