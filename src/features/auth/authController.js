@@ -4,6 +4,13 @@ import usersDAL from "../users/usersDAL";
 async function signup(req, res) {
   try {
     const { email, password } = req.body;
+    const users = await usersDAL.findAll({ raw: true, where: { email } });
+
+    if (Array.isArray(users) && users.length) {
+      res.status(400).send({ exception: "EmailAlreadyInUseException" });
+      return;
+    }
+
     const hash = await utils.password.hash(password);
     const values = {
       email,
