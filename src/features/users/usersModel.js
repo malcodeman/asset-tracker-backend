@@ -1,8 +1,9 @@
 import { DataTypes } from "sequelize";
 
 import sequelize from "../../db";
+import Workspace from "../workspaces/workspacesModel";
 
-const User = sequelize.define("User", {
+const User = sequelize.define("user", {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -19,5 +20,8 @@ const User = sequelize.define("User", {
     },
   },
 });
+
+User.hasMany(Workspace);
+Workspace.belongsTo(User);
 
 export default User;
