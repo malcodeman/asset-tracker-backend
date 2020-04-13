@@ -34,7 +34,7 @@ async function signup(req, res) {
   }
 }
 
-async function login(req, res) {
+async function signin(req, res) {
   try {
     const { email, password } = req.body;
     const users = await usersDAL.findAll({ raw: true, where: { email } });
@@ -68,9 +68,9 @@ async function login(req, res) {
   }
 }
 
-export { signup, login };
+export { signup, signin };
 
 export default {
   signup,
-  login,
+  signin,
 };
