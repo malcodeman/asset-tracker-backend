@@ -6,6 +6,7 @@ const Asset = sequelize.define("asset", {
   tag: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
     validate: {
       notEmpty: true,
     },

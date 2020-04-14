@@ -1,7 +1,7 @@
 import Workspace from "./workspacesModel";
 
-async function create(values) {
-  const workspace = await Workspace.create(values);
+async function create(values, options) {
+  const workspace = await Workspace.create(values, options);
 
   return workspace;
 }
