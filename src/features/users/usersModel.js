@@ -19,6 +19,15 @@ const User = sequelize.define("user", {
       notEmpty: true,
     },
   },
+  firstName: {
+    type: DataTypes.STRING,
+  },
+  lastName: {
+    type: DataTypes.STRING,
+  },
+  company: {
+    type: DataTypes.STRING,
+  },
 });
 
 User.hasMany(Workspace);

@@ -12,9 +12,16 @@ async function findAll(where) {
   return users;
 }
 
-export { create, findAll };
+async function update(values, options) {
+  const user = await User.update(values, options);
+
+  return user;
+}
+
+export { create, findAll, update };
 
 export default {
   create,
   findAll,
+  update,
 };

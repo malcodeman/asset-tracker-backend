@@ -3,20 +3,19 @@ import usersDAL from "../users/usersDAL";
 
 async function signup(req, res) {
   try {
-    const { email, password } = req.body;
-    const users = await usersDAL.findAll({ raw: true, where: { email } });
+    const { values } = req.body;
+    const users = await usersDAL.findAll({
+      raw: true,
+      where: { email: values.email },
+    });
 
     if (Array.isArray(users) && users.length) {
       res.status(400).send({ exception: "EmailAlreadyInUseException" });
       return;
     }
 
-    const hash = await utils.password.hash(password);
-    const values = {
-      email,
-      password: hash,
-    };
-    const user = await usersDAL.create(values);
+    const hash = await utils.password.hash(values.password);
+    const user = await usersDAL.create({ ...values, password: hash });
     const payload = { id: user.id };
     const token = utils.jwt.sign(payload);
     const response = {
