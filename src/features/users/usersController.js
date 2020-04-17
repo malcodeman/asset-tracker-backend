@@ -5,6 +5,7 @@ async function getMyself(req, res) {
   try {
     const id = req.userId;
     const users = await DAL.findAll({
+      attributes: { exclude: ["password"] },
       where: {
         id,
       },
