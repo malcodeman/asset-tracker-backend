@@ -8,6 +8,7 @@ const router = express.Router();
 router.use(middlewares.requireAuthentication);
 router.post("/", workspacesController.create);
 router.get("/", workspacesController.findAll);
+router.get("/:id/assets", workspacesController.findAssetsByWorkspaceId);
 router.delete("/:id", workspacesController.destroy);
 
 export default router;
