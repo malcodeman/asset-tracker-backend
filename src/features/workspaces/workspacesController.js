@@ -5,21 +5,10 @@ import Asset from "../assets/assetsModel";
 async function create(req, res) {
   try {
     const userId = req.userId;
-    const { name } = req.body;
-    const workspaces = await workspacesDAL.findAll({
-      raw: true,
-      where: {
-        userId,
-      },
-    });
-    const values = {
-      userId,
-      name: name || `Workspace ${workspaces.length + 1}`,
-    };
-    const workspace = await workspacesDAL.create(values);
+    const { values } = req.body;
+    const workspace = await workspacesDAL.create({ ...values, userId });
     const response = {
       ...workspace.dataValues,
-      assets: [],
     };
 
     res.status(200).send(response);

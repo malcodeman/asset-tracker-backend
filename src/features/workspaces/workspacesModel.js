@@ -11,6 +11,13 @@ const Workspace = sequelize.define("workspace", {
       notEmpty: true,
     },
   },
+  emoji: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
 });
 
 Workspace.hasMany(Asset);
