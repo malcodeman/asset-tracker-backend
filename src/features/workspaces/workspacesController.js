@@ -1,6 +1,7 @@
 import utils from "../../utils";
 import workspacesDAL from "./workspacesDAL";
 import Asset from "../assets/assetsModel";
+import Vendor from "../vendors/vendorsModel";
 
 async function create(req, res) {
   try {
@@ -47,6 +48,24 @@ async function findAssetsByWorkspaceId(req, res) {
   }
 }
 
+async function findVendorsByWorkspaceId(req, res) {
+  try {
+    const { id } = req.params;
+    const options = {
+      where: {
+        id,
+      },
+      include: [{ model: Vendor }],
+    };
+    const workspaces = await workspacesDAL.findAll(options);
+
+    res.status(200).send(workspaces);
+  } catch (error) {
+    utils.logger.log(error, utils.logger.LEVELS.ERROR);
+    res.status(400).send({ message: error.message, stack: error.stack });
+  }
+}
+
 async function destroy(req, res) {
   try {
     const { id } = req.params;
@@ -64,11 +83,18 @@ async function destroy(req, res) {
   }
 }
 
-export { create, findAll, findAssetsByWorkspaceId, destroy };
+export {
+  create,
+  findAll,
+  findAssetsByWorkspaceId,
+  destroy,
+  findVendorsByWorkspaceId,
+};
 
 export default {
   create,
   findAll,
   findAssetsByWorkspaceId,
   destroy,
+  findVendorsByWorkspaceId,
 };

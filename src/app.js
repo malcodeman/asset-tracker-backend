@@ -5,6 +5,7 @@ import authRoutes from "./features/auth/authRoutes";
 import workspacesRoutes from "./features/workspaces/workspacesRoutes";
 import assetsRoutes from "./features/assets/assetsRoutes";
 import usersRoutes from "./features/users/usersRoutes";
+import vendorsRoutes from "./features/vendors/vendorsRoutes";
 
 const app = express();
 
@@ -19,5 +20,6 @@ app.use("/auth", authRoutes);
 app.use("/workspaces", workspacesRoutes);
 app.use("/assets", assetsRoutes);
 app.use("/users", usersRoutes);
+app.use("/vendors", vendorsRoutes);
 
 export default app;
