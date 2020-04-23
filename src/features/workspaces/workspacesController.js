@@ -34,14 +34,16 @@ async function findAssetsByWorkspaceId(req, res) {
   try {
     const { id } = req.params;
     const options = {
+      attributes: ["id", "name"],
       where: {
         id,
       },
       include: [{ model: Asset }],
     };
     const workspaces = await workspacesDAL.findAll(options);
+    const response = workspaces[0];
 
-    res.status(200).send(workspaces);
+    res.status(200).send(response);
   } catch (error) {
     utils.logger.log(error, utils.logger.LEVELS.ERROR);
     res.status(400).send({ message: error.message, stack: error.stack });
@@ -52,14 +54,16 @@ async function findVendorsByWorkspaceId(req, res) {
   try {
     const { id } = req.params;
     const options = {
+      attributes: ["id", "name"],
       where: {
         id,
       },
       include: [{ model: Vendor }],
     };
     const workspaces = await workspacesDAL.findAll(options);
+    const response = workspaces[0];
 
-    res.status(200).send(workspaces);
+    res.status(200).send(response);
   } catch (error) {
     utils.logger.log(error, utils.logger.LEVELS.ERROR);
     res.status(400).send({ message: error.message, stack: error.stack });
