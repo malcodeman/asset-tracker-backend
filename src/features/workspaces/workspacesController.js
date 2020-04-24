@@ -2,6 +2,7 @@ import utils from "../../utils";
 import workspacesDAL from "./workspacesDAL";
 import Asset from "../assets/assetsModel";
 import Vendor from "../vendors/vendorsModel";
+import Employee from "../employees/employeesModel";
 
 async function create(req, res) {
   try {
@@ -70,6 +71,26 @@ async function findVendorsByWorkspaceId(req, res) {
   }
 }
 
+async function findEmployeesByWorkspaceId(req, res) {
+  try {
+    const { id } = req.params;
+    const options = {
+      attributes: ["id", "name"],
+      where: {
+        id,
+      },
+      include: [{ model: Employee }],
+    };
+    const workspaces = await workspacesDAL.findAll(options);
+    const response = workspaces[0];
+
+    res.status(200).send(response);
+  } catch (error) {
+    utils.logger.log(error, utils.logger.LEVELS.ERROR);
+    res.status(400).send({ message: error.message, stack: error.stack });
+  }
+}
+
 async function destroy(req, res) {
   try {
     const { id } = req.params;
@@ -93,6 +114,7 @@ export {
   findAssetsByWorkspaceId,
   destroy,
   findVendorsByWorkspaceId,
+  findEmployeesByWorkspaceId,
 };
 
 export default {
@@ -101,4 +123,5 @@ export default {
   findAssetsByWorkspaceId,
   destroy,
   findVendorsByWorkspaceId,
+  findEmployeesByWorkspaceId,
 };

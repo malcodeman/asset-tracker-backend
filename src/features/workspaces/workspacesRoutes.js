@@ -10,6 +10,7 @@ router.post("/", workspacesController.create);
 router.get("/", workspacesController.findAll);
 router.get("/:id/assets", workspacesController.findAssetsByWorkspaceId);
 router.get("/:id/vendors", workspacesController.findVendorsByWorkspaceId);
+router.get("/:id/employees", workspacesController.findEmployeesByWorkspaceId);
 router.delete("/:id", workspacesController.destroy);
 
 export default router;
