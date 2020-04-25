@@ -3,6 +3,7 @@ import workspacesDAL from "./workspacesDAL";
 import Asset from "../assets/assetsModel";
 import Vendor from "../vendors/vendorsModel";
 import Employee from "../employees/employeesModel";
+import Location from "../locations/locationsModel";
 
 async function create(req, res) {
   try {
@@ -91,6 +92,26 @@ async function findEmployeesByWorkspaceId(req, res) {
   }
 }
 
+async function findLocationsByWorkspaceId(req, res) {
+  try {
+    const { id } = req.params;
+    const options = {
+      attributes: ["id", "name"],
+      where: {
+        id,
+      },
+      include: [{ model: Location }],
+    };
+    const workspaces = await workspacesDAL.findAll(options);
+    const response = workspaces[0];
+
+    res.status(200).send(response);
+  } catch (error) {
+    utils.logger.log(error, utils.logger.LEVELS.ERROR);
+    res.status(400).send({ message: error.message, stack: error.stack });
+  }
+}
+
 async function destroy(req, res) {
   try {
     const { id } = req.params;
@@ -115,6 +136,7 @@ export {
   destroy,
   findVendorsByWorkspaceId,
   findEmployeesByWorkspaceId,
+  findLocationsByWorkspaceId,
 };
 
 export default {
@@ -124,4 +146,5 @@ export default {
   destroy,
   findVendorsByWorkspaceId,
   findEmployeesByWorkspaceId,
+  findLocationsByWorkspaceId,
 };

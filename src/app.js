@@ -7,6 +7,7 @@ import assetsRoutes from "./features/assets/assetsRoutes";
 import usersRoutes from "./features/users/usersRoutes";
 import vendorsRoutes from "./features/vendors/vendorsRoutes";
 import employeesRoutes from "./features/employees/employeesRoutes";
+import locationsRoutes from "./features/locations/locationsRoutes";
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use("/assets", assetsRoutes);
 app.use("/users", usersRoutes);
 app.use("/vendors", vendorsRoutes);
 app.use("/employees", employeesRoutes);
+app.use("/locations", locationsRoutes);
 
 export default app;

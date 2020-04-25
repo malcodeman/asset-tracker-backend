@@ -4,6 +4,7 @@ import sequelize from "../../db";
 import Asset from "../assets/assetsModel";
 import Vendor from "../vendors/vendorsModel";
 import Employee from "../employees/employeesModel";
+import Location from "../locations/locationsModel";
 
 const Workspace = sequelize.define("workspace", {
   name: {
@@ -25,8 +26,10 @@ const Workspace = sequelize.define("workspace", {
 Workspace.hasMany(Asset);
 Workspace.hasMany(Vendor);
 Workspace.hasMany(Employee);
+Workspace.hasMany(Location);
 Asset.belongsTo(Workspace);
 Vendor.belongsTo(Workspace);
 Employee.belongsTo(Workspace);
+Location.belongsTo(Workspace);
 
 export default Workspace;

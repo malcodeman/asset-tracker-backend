@@ -11,6 +11,7 @@ router.get("/", workspacesController.findAll);
 router.get("/:id/assets", workspacesController.findAssetsByWorkspaceId);
 router.get("/:id/vendors", workspacesController.findVendorsByWorkspaceId);
 router.get("/:id/employees", workspacesController.findEmployeesByWorkspaceId);
+router.get("/:id/locations", workspacesController.findLocationsByWorkspaceId);
 router.delete("/:id", workspacesController.destroy);
 
 export default router;
