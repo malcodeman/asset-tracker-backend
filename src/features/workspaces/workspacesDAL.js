@@ -12,16 +12,23 @@ async function findAll(where) {
   return workspaces;
 }
 
+async function findOne(where) {
+  const workspace = await Workspace.findOne(where);
+
+  return workspace;
+}
+
 async function destroy(options) {
   const workspace = await Workspace.destroy(options);
 
   return workspace;
 }
 
-export { create, findAll, destroy };
+export { create, findAll, findOne, destroy };
 
 export default {
   create,
   findAll,
+  findOne,
   destroy,
 };

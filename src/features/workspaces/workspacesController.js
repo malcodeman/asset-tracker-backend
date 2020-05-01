@@ -21,9 +21,15 @@ async function create(req, res) {
   }
 }
 
-async function findAll(_req, res) {
+async function findAll(req, res) {
   try {
-    const workspaces = await workspacesDAL.findAll();
+    const userId = req.userId;
+    const where = {
+      where: {
+        userId,
+      },
+    };
+    const workspaces = await workspacesDAL.findAll(where);
 
     res.status(200).send(workspaces);
   } catch (error) {
@@ -34,16 +40,17 @@ async function findAll(_req, res) {
 
 async function findAssetsByWorkspaceId(req, res) {
   try {
+    const userId = req.userId;
     const { id } = req.params;
     const options = {
       attributes: ["id", "name"],
       where: {
+        userId,
         id,
       },
       include: [{ model: Asset }],
     };
-    const workspaces = await workspacesDAL.findAll(options);
-    const response = workspaces[0];
+    const response = await workspacesDAL.findOne(options);
 
     res.status(200).send(response);
   } catch (error) {
@@ -54,16 +61,17 @@ async function findAssetsByWorkspaceId(req, res) {
 
 async function findVendorsByWorkspaceId(req, res) {
   try {
+    const userId = req.userId;
     const { id } = req.params;
     const options = {
       attributes: ["id", "name"],
       where: {
+        userId,
         id,
       },
       include: [{ model: Vendor }],
     };
-    const workspaces = await workspacesDAL.findAll(options);
-    const response = workspaces[0];
+    const response = await workspacesDAL.findOne(options);
 
     res.status(200).send(response);
   } catch (error) {
@@ -74,16 +82,17 @@ async function findVendorsByWorkspaceId(req, res) {
 
 async function findEmployeesByWorkspaceId(req, res) {
   try {
+    const userId = req.userId;
     const { id } = req.params;
     const options = {
       attributes: ["id", "name"],
       where: {
+        userId,
         id,
       },
       include: [{ model: Employee }],
     };
-    const workspaces = await workspacesDAL.findAll(options);
-    const response = workspaces[0];
+    const response = await workspacesDAL.findOne(options);
 
     res.status(200).send(response);
   } catch (error) {
@@ -94,16 +103,17 @@ async function findEmployeesByWorkspaceId(req, res) {
 
 async function findLocationsByWorkspaceId(req, res) {
   try {
+    const userId = req.userId;
     const { id } = req.params;
     const options = {
       attributes: ["id", "name"],
       where: {
+        userId,
         id,
       },
       include: [{ model: Location }],
     };
-    const workspaces = await workspacesDAL.findAll(options);
-    const response = workspaces[0];
+    const response = await workspacesDAL.findOne(options);
 
     res.status(200).send(response);
   } catch (error) {
