@@ -48,7 +48,9 @@ async function findAssetsByWorkspaceId(req, res) {
         userId,
         id,
       },
-      include: [{ model: Asset }],
+      include: [
+        { model: Asset, include: [{ model: Vendor }, { model: Location }] },
+      ],
     };
     const response = await workspacesDAL.findOne(options);
 

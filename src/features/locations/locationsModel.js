@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 
 import sequelize from "../../db";
+import Asset from "../assets/assetsModel";
 
 const Location = sequelize.define("location", {
   name: {
@@ -11,5 +12,8 @@ const Location = sequelize.define("location", {
     },
   },
 });
+
+Location.hasOne(Asset);
+Asset.belongsTo(Location);
 
 export default Location;

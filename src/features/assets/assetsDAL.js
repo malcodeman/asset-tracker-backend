@@ -12,6 +12,12 @@ async function findAll(where) {
   return assets;
 }
 
+async function findOne(where) {
+  const asset = await Asset.findOne(where);
+
+  return asset;
+}
+
 async function destroy(options) {
   const asset = await Asset.destroy(options);
 
@@ -24,11 +30,12 @@ async function update(values, options) {
   return asset;
 }
 
-export { create, findAll, destroy, update };
+export { create, findAll, findOne, destroy, update };
 
 export default {
   create,
   findAll,
+  findOne,
   destroy,
   update,
 };

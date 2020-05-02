@@ -6,7 +6,6 @@ const Asset = sequelize.define("asset", {
   tag: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
     validate: {
       notEmpty: true,
     },
@@ -17,16 +16,10 @@ const Asset = sequelize.define("asset", {
   photoURL: {
     type: DataTypes.STRING,
   },
-  location: {
-    type: DataTypes.STRING,
-  },
   price: {
     type: DataTypes.FLOAT,
   },
   usedBy: {
-    type: DataTypes.STRING,
-  },
-  vendor: {
     type: DataTypes.STRING,
   },
   purchaseDate: {

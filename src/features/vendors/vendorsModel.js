@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 
 import sequelize from "../../db";
+import Asset from "../assets/assetsModel";
 
 const Vendor = sequelize.define("vendor", {
   name: {
@@ -11,5 +12,8 @@ const Vendor = sequelize.define("vendor", {
     },
   },
 });
+
+Vendor.hasOne(Asset);
+Asset.belongsTo(Vendor);
 
 export default Vendor;

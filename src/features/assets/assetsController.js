@@ -1,12 +1,21 @@
 import utils from "../../utils";
 import assetsDAL from "./assetsDAL";
+import Vendor from "../vendors/vendorsModel";
+import Location from "../locations/locationsModel";
 
 async function create(req, res) {
   try {
     const { values } = req.body;
     const asset = await assetsDAL.create(values);
+    const where = {
+      where: {
+        id: asset.dataValues.id,
+      },
+      include: [{ model: Vendor }, { model: Location }],
+    };
+    const response = await assetsDAL.findOne(where);
 
-    res.status(200).send(asset);
+    res.status(200).send(response);
   } catch (error) {
     utils.logger.log(error, utils.logger.LEVELS.ERROR);
     res.status(400).send({ message: error.message, stack: error.stack });
