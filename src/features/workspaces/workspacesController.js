@@ -52,6 +52,12 @@ async function findAssetsByWorkspaceId(req, res) {
     };
     const response = await workspacesDAL.findOne(options);
 
+    if (!response) {
+      utils.logger.log("Workspace not found", utils.logger.LEVELS.ERROR);
+      res.status(404).send({ message: "Workspace not found" });
+      return;
+    }
+
     res.status(200).send(response);
   } catch (error) {
     utils.logger.log(error, utils.logger.LEVELS.ERROR);
@@ -72,6 +78,12 @@ async function findVendorsByWorkspaceId(req, res) {
       include: [{ model: Vendor }],
     };
     const response = await workspacesDAL.findOne(options);
+
+    if (!response) {
+      utils.logger.log("Workspace not found", utils.logger.LEVELS.ERROR);
+      res.status(404).send({ message: "Workspace not found" });
+      return;
+    }
 
     res.status(200).send(response);
   } catch (error) {
@@ -94,6 +106,12 @@ async function findEmployeesByWorkspaceId(req, res) {
     };
     const response = await workspacesDAL.findOne(options);
 
+    if (!response) {
+      utils.logger.log("Workspace not found", utils.logger.LEVELS.ERROR);
+      res.status(404).send({ message: "Workspace not found" });
+      return;
+    }
+
     res.status(200).send(response);
   } catch (error) {
     utils.logger.log(error, utils.logger.LEVELS.ERROR);
@@ -114,6 +132,12 @@ async function findLocationsByWorkspaceId(req, res) {
       include: [{ model: Location }],
     };
     const response = await workspacesDAL.findOne(options);
+
+    if (!response) {
+      utils.logger.log("Workspace not found", utils.logger.LEVELS.ERROR);
+      res.status(404).send({ message: "Workspace not found" });
+      return;
+    }
 
     res.status(200).send(response);
   } catch (error) {
