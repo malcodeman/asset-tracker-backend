@@ -2,16 +2,24 @@ import utils from "../../utils";
 import assetsDAL from "./assetsDAL";
 import Vendor from "../vendors/vendorsModel";
 import Location from "../locations/locationsModel";
+import Employee from "../employees/employeesModel";
 
 async function create(req, res) {
   try {
-    const { values } = req.body;
+    const { usedBy, ...values } = req.body.values;
     const asset = await assetsDAL.create(values);
+
+    await asset.setEmployees(usedBy);
+
     const where = {
       where: {
         id: asset.dataValues.id,
       },
-      include: [{ model: Vendor }, { model: Location }],
+      include: [
+        { model: Vendor },
+        { model: Location },
+        { model: Employee, through: { attributes: [] } },
+      ],
     };
     const response = await assetsDAL.findOne(where);
 
