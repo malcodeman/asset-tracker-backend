@@ -1,5 +1,6 @@
 import faker from "faker";
 
+import "../src/env";
 import User from "../src/features/users/usersModel";
 import Workspace from "../src/features/workspaces/workspacesModel";
 import Location from "../src/features/locations/locationsModel";
