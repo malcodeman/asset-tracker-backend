@@ -172,6 +172,33 @@ async function destroy(req, res) {
   }
 }
 
+async function update(req, res) {
+  try {
+    const userId = req.userId;
+    const { id } = req.params;
+    const options = {
+      where: {
+        userId,
+        id,
+      },
+    };
+    const { values } = req.body;
+    const update = await workspacesDAL.update(values, options);
+    const updated = Boolean(update[0]);
+
+    if (updated) {
+      const workspace = await workspacesDAL.findOne(options);
+
+      res.status(200).send(workspace);
+    } else {
+      res.status(400).send({ exception: "WorkspaceNotFoundException" });
+    }
+  } catch (error) {
+    utils.logger.log(error, utils.logger.LEVELS.ERROR);
+    res.status(400).send({ message: error.message, stack: error.stack });
+  }
+}
+
 export {
   create,
   findAll,
@@ -180,6 +207,7 @@ export {
   findVendorsByWorkspaceId,
   findEmployeesByWorkspaceId,
   findLocationsByWorkspaceId,
+  update,
 };
 
 export default {
@@ -190,4 +218,5 @@ export default {
   findVendorsByWorkspaceId,
   findEmployeesByWorkspaceId,
   findLocationsByWorkspaceId,
+  update,
 };

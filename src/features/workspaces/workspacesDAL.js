@@ -24,11 +24,18 @@ async function destroy(options) {
   return workspace;
 }
 
-export { create, findAll, findOne, destroy };
+async function update(values, options) {
+  const workspace = await Workspace.update(values, options);
+
+  return workspace;
+}
+
+export { create, findAll, findOne, destroy, update };
 
 export default {
   create,
   findAll,
   findOne,
   destroy,
+  update,
 };
