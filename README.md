@@ -25,3 +25,7 @@ Database commands:
 ```
 yarn run db:seed
 ```
+
+## License
+
+[MIT](./LICENSE)
